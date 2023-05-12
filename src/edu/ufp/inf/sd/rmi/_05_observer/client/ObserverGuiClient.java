@@ -98,7 +98,8 @@ public class ObserverGuiClient extends javax.swing.JFrame {
 
 
     protected void updateTextArea() {
-        String msg="[" + this.observer.getLastObserverState().getId() + "] " + this.observer.getLastObserverState().getMsg();
+
+        String msg = "[" + this.observer.getLastObserverState().getId() + "] " + this.observer.getLastObserverState().getMsg();
         this.jTextAreaChatHistory.append(msg + '\n');
     }
 

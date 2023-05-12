@@ -1,6 +1,7 @@
 package edu.ufp.inf.sd.rmi._06_visitor.server;
 
-public interface VisitorFoldersOperationsI {
-    public Object visitConcreteElementStateBooks(ElementFolderRI element);
+import java.rmi.RemoteException;
 
+public interface VisitorFoldersOperationsI {
+    Object visitConcreteElementStateBooks(ElementFolderRI element) throws RemoteException;
 }

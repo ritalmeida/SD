@@ -78,7 +78,7 @@ public class DigLibServer {
             if (registry != null) {
 
                 DBMockup db = new DBMockup();
-                DigLibFactoryRI digLibFactoryRI = new DigLibFactoryImpl(db);
+                DigLibFactoryRI digLibFactoryRI = new DigLibFactoryImpl();
                 String serviceUrl = contextRMI.getServicesUrl(0);
                 registry.rebind(serviceUrl, digLibFactoryRI);
             } else {

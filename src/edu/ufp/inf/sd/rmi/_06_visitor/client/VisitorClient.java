@@ -1,7 +1,11 @@
 package edu.ufp.inf.sd.rmi._06_visitor.client;
 
-import edu.ufp.inf.sd.rmi._06_visitor.server.ElementFolderRI;
+import edu.ufp.inf.sd.rmi._04_diglib.server.Book;
+import edu.ufp.inf.sd.rmi._04_diglib.server.DigLibFactoryRI;
+import edu.ufp.inf.sd.rmi._04_diglib.server.DigLibSessionRI;
+import edu.ufp.inf.sd.rmi._06_visitor.server.VisitorFoldersOperationDeleteFile;
 import edu.ufp.inf.sd.rmi.util.rmisetup.SetupContextRMI;
+import edu.ufp.inf.sd.rmi._06_visitor.server.ElementFolderRI;
 import edu.ufp.inf.sd.rmi._06_visitor.server.VisitorFoldersOperationCreateFile;
 import edu.ufp.inf.sd.rmi._06_visitor.server.VisitorFoldersOperationsI;
 
@@ -12,27 +16,52 @@ import java.rmi.registry.Registry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * <p>
+ * Title: Projecto SD</p>
+ * <p>
+ * Description: Projecto apoio aulas SD</p>
+ * <p>
+ * Copyright: Copyright (c) 2017</p>
+ * <p>
+ * Company: UFP </p>
+ *
+ * @author Rui S. Moreira
+ * @version 3.0
+ */
 public class VisitorClient {
 
-
+    /**
+     * Context for connecting a RMI client to a RMI Servant
+     */
     private SetupContextRMI contextRMI;
-    private ElementFolderRI myRI;
+    /**
+     * Remote interface that will hold the Servant proxy
+     */
+    private ElementFolderRI elementFolderRI;
 
     public static void main(String[] args) {
         if (args != null && args.length < 2) {
+            System.err.println("usage: java [options] edu.ufp.sd.inf.rmi._06_visitor.server.VisitorClient <rmi_registry_ip> <rmi_registry_port> <service_name>");
             System.exit(-1);
         } else {
-            VisitorClient clt = new VisitorClient(args);
-            clt.lookupService();
-            clt.playService();
+            //1. ============ Setup client RMI context ============
+            VisitorClient hwc = new VisitorClient(args);
+            //2. ============ Lookup service ============
+            hwc.lookupService();
+            //3. ============ Play with service ============
+            hwc.playService();
         }
     }
 
-    public VisitorClient(String[] args) {
+    public VisitorClient(String args[]) {
         try {
-            String registryIP   = args[0];
+            //List ans set args
+            SetupContextRMI.printArgs(this.getClass().getName(), args);
+            String registryIP = args[0];
             String registryPort = args[1];
-            String serviceName  = args[2];
+            String serviceName = args[2];
+            //Create a context for RMI setup
             contextRMI = new SetupContextRMI(this.getClass(), registryIP, registryPort, new String[]{serviceName});
         } catch (RemoteException e) {
             Logger.getLogger(VisitorClient.class.getName()).log(Level.SEVERE, null, e);
@@ -41,23 +70,35 @@ public class VisitorClient {
 
     private Remote lookupService() {
         try {
+            //Get proxy to rmiregistry
             Registry registry = contextRMI.getRegistry();
+            //Lookup service on rmiregistry and wait for calls
             if (registry != null) {
+                //Get service url (including servicename)
                 String serviceUrl = contextRMI.getServicesUrl(0);
-                myRI = (ElementFolderRI) registry.lookup(serviceUrl);
+                Logger.getLogger(this.getClass().getName()).log(Level.INFO, "going to lookup service @ {0}", serviceUrl);
+
+                //============ Get proxy to HelloWorld service ============
+                elementFolderRI = (ElementFolderRI) registry.lookup(serviceUrl);
             } else {
                 Logger.getLogger(this.getClass().getName()).log(Level.INFO, "registry not bound (check IPs). :(");
+                //registry = LocateRegistry.createRegistry(1099);
             }
         } catch (RemoteException | NotBoundException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
-        return myRI;
+        return elementFolderRI;
     }
 
     private void playService() {
         try {
-            VisitorFoldersOperationsI v1 = new VisitorFoldersOperationCreateFile("create1.txt");
-            myRI.acceptVisitor(v1);
+            //============ Call remote service ============
+            VisitorFoldersOperationCreateFile visitorCreate = new VisitorFoldersOperationCreateFile("teste1.txt");
+            this.elementFolderRI.acceptVisitor(visitorCreate);
+
+            VisitorFoldersOperationDeleteFile visitorDelete = new VisitorFoldersOperationDeleteFile(("teste1.txt"));
+
+            Logger.getLogger(this.getClass().getName()).log(Level.INFO, "going to finish, bye. ;)");
         } catch (RemoteException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }

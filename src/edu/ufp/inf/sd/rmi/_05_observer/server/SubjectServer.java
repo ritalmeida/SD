@@ -2,8 +2,13 @@ package edu.ufp.inf.sd.rmi._05_observer.server;
 
 import edu.ufp.inf.sd.rmi.util.rmisetup.SetupContextRMI;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.registry.Registry;
+import java.util.Properties;
+import java.util.function.BiConsumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,9 +20,13 @@ public class SubjectServer {
     private SubjectRI subjectRI;
 
     public static void main(String[] args) {
+
         if (args != null && args.length < 3) {
+
+            System.out.println("usage: java [options] edu.ufp.sd.observer.server.SubjectServer <rmi_registry_ip> <rmi_registry_port> <service_name>");
             System.exit(-1);
         } else {
+
             SubjectServer srv = new SubjectServer(args);
             srv.rebindService();
         }
@@ -25,28 +34,62 @@ public class SubjectServer {
 
 
     public SubjectServer(String args[]) {
+
         try {
+            SetupContextRMI.printArgs(this.getClass().getName(), args);
             String registryIP   = args[0];
             String registryPort = args[1];
             String serviceName  = args[2];
             contextRMI = new SetupContextRMI(this.getClass(), registryIP, registryPort, new String[]{serviceName});
         } catch (RemoteException e) {
+
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
         }
     }
 
     private void rebindService() {
+
         try {
+            //Get proxy to rmiregistry
             Registry registry = contextRMI.getRegistry();
+            //Bind service on rmi registry and wait for cals
             if (registry != null) {
+
                 subjectRI = new SubjectImpl();
+                //Get service url
                 String serviceUrl = contextRMI.getServicesUrl(0);
+                Logger.getLogger(this.getClass().getName()).log(Level.INFO, "going to rebind service @ {0}", serviceUrl);
+
                 registry.rebind(serviceUrl, subjectRI);
+                Logger.getLogger(this.getClass().getName()).log(Level.INFO, "service bound and running. :)");
             } else {
+
                 Logger.getLogger(this.getClass().getName()).log(Level.INFO, "registry not bound (check IPs). :(");
             }
         } catch (RemoteException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private static void loadProperties() throws IOException {
+
+        Logger.getLogger(Thread.currentThread().getName()).log(Level.INFO, "going to load props... ");
+        //create and load default properties
+        Properties defaultProps = new Properties();
+        FileInputStream in = new FileInputStream("defaultproperties.txt");
+        defaultProps.load(in);
+        in.close();
+
+        BiConsumer<Object, Object> bc = (key, value) -> {
+            System.out.println(key.toString() + " = " + value.toString());
+        };
+        defaultProps.forEach(bc);
+
+        //create application properties with default
+        Properties props = new Properties(defaultProps);
+
+        FileOutputStream out = new FileOutputStream("defaultproperties2.txt");
+        props.store(out, "---No Comment---");
+        out.close();
     }
 }

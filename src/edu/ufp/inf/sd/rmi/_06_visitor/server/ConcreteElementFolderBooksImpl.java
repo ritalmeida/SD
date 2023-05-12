@@ -3,9 +3,7 @@ package edu.ufp.inf.sd.rmi._06_visitor.server;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-
 public class ConcreteElementFolderBooksImpl extends UnicastRemoteObject implements ElementFolderRI {
-
 
     public SingletonFolderOperationsBooks stateBooksFolder;
 

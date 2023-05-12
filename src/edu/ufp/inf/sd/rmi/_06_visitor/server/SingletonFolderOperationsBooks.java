@@ -40,7 +40,7 @@ public class SingletonFolderOperationsBooks implements SingletonFoldersOperation
             File newFile = new File(this.folderBooks.getAbsolutePath() + "/" + fname);
             return newFile.createNewFile();
         } catch (IOException ex) {
-            System.out.println("IOException");
+            Logger.getLogger(SingletonFolderOperationsBooks.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }

@@ -14,6 +14,7 @@ public class ObserverImpl extends UnicastRemoteObject implements ObserverRI{
     protected ObserverGuiClient chatFrame;
 
     public ObserverImpl(String id, ObserverGuiClient f, SubjectRI subjectRI) throws RemoteException{
+
         super();
         this.id=id;
         this.chatFrame = f;

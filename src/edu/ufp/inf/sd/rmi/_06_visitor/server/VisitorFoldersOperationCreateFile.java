@@ -1,32 +1,34 @@
 package edu.ufp.inf.sd.rmi._06_visitor.server;
 
-import java.io.Serializable;
+import jdk.jfr.consumer.RecordedMethod;
 
+import java.io.Serializable;
+import java.rmi.RemoteException;
 
 public class VisitorFoldersOperationCreateFile implements VisitorFoldersOperationsI, Serializable {
-
     public String fileToCreate;
-
     public String fileToCreateWithPrefix;
+    public VisitorFoldersOperationCreateFile(String newFolder){
 
-    public VisitorFoldersOperationCreateFile(String newFolder){ this.fileToCreate = newFolder;}
-
-    @Override
-    public Object visitConcreteElementStateBooks(ElementFolderRI element)
-    {
-        SingletonFolderOperationsBooks s = ((ConcreteElementFolderBooksImpl)element).getStateBooksFolder();
-        fileToCreateWithPrefix = "VisitorBook_"+fileToCreate;
-        System.out.println("VisitorStateFolderOperationDeleteFile - visitCOncreteElementStateBooks() : going to create file");
-        return s.createFile(fileToCreateWithPrefix);
+        SingletonFolderOperationsBooks.createSingletonFolderOperationsBooks(newFolder);
     }
 
-    public String getFileToCreate()
-    {
+    @Override
+    public Object visitConcreteElementStateBooks(ElementFolderRI element) throws RemoteException {
+
+        ((ConcreteElementFolderBooksImpl)element).getStateBooksFolder().createFile(this.fileToCreate);
+        return element;
+        /*SingletonFolderOperationsBooks s = ((ConcreteElementFolderBooksImpl)element).getStateBooksFolder();
+        fileToCreateWithPrefix = "VisitorBook_"+fileToCreate;
+        System.out.println("VisitorStateFolderOperationDeleteFile - visitCOncreteElementStateBooks() : going to create file");
+        return s.createFile(fileToCreateWithPrefix);*/
+    }
+
+    public String getFileToCreate(){
         return this.fileToCreate;
     }
 
-    public void setFileToCreate(String fileToCreate)
-    {
+    public void setFileToCreate(String fileToCreate){
         this.fileToCreate = fileToCreate;
     }
 
