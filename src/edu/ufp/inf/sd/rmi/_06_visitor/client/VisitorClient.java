@@ -41,8 +41,10 @@ public class VisitorClient {
     private ElementFolderRI elementFolderRI;
 
     public static void main(String[] args) {
+
         if (args != null && args.length < 2) {
-            System.err.println("usage: java [options] edu.ufp.sd.inf.rmi._06_visitor.server.VisitorClient <rmi_registry_ip> <rmi_registry_port> <service_name>");
+
+            System.err.println("usage: java [options] edu.ufp.sd.inf.rmi._04_diglib.server.DigLibClient <rmi_registry_ip> <rmi_registry_port> <service_name>");
             System.exit(-1);
         } else {
             //1. ============ Setup client RMI context ============
@@ -55,6 +57,7 @@ public class VisitorClient {
     }
 
     public VisitorClient(String args[]) {
+
         try {
             //List ans set args
             SetupContextRMI.printArgs(this.getClass().getName(), args);
@@ -69,6 +72,7 @@ public class VisitorClient {
     }
 
     private Remote lookupService() {
+
         try {
             //Get proxy to rmiregistry
             Registry registry = contextRMI.getRegistry();
@@ -93,14 +97,22 @@ public class VisitorClient {
     private void playService() {
         try {
             //============ Call remote service ============
-            VisitorFoldersOperationCreateFile visitorCreate = new VisitorFoldersOperationCreateFile("teste1.txt");
+            VisitorFoldersOperationCreateFile visitorCreate = new VisitorFoldersOperationCreateFile("teste.txt");
             this.elementFolderRI.acceptVisitor(visitorCreate);
 
-            VisitorFoldersOperationDeleteFile visitorDelete = new VisitorFoldersOperationDeleteFile(("teste1.txt"));
+            VisitorFoldersOperationDeleteFile visitorDelete = new VisitorFoldersOperationDeleteFile(("teste.txt"));
 
             Logger.getLogger(this.getClass().getName()).log(Level.INFO, "going to finish, bye. ;)");
         } catch (RemoteException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void printArgs(String args[]) {
+
+        for(int i = 0; args != null && i < args.length; i++) {
+
+            Logger.getLogger(this.getClass().getName()).log(Level.INFO, "args[0] = {1}", new Object[]{i, args[i]});
         }
     }
 }

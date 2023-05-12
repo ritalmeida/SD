@@ -15,12 +15,12 @@ public class VisitorFoldersOperationDeleteFile implements VisitorFoldersOperatio
     @Override
     public Object visitConcreteElementStateBooks(ElementFolderRI element) throws RemoteException {
 
-        ((ConcreteElementFolderBooksImpl)element).getStateBooksFolder().createFile(this.fileToDelete);
-        /*SingletonFolderOperationsBooks s = ((ConcreteElementFolderBooksImpl)element).getStateBooksFolder();
+        //((ConcreteElementFolderBooksImpl)element).getStateBooksFolder().createFile(this.fileToDelete);
+        SingletonFolderOperationsBooks s = ((ConcreteElementFolderBooksImpl)element).getStateBooksFolder();
         fileToDeleteWithPrefix = "VisitorBook_"+fileToDelete;
         System.out.println("VisitorStateFolderOperationDeleteFile - visitCOncreteElementStateBooks() : going to delete");
-        return s.deleteFile(fileToDeleteWithPrefix);*/
-        return element;
+        return s.deleteFile(fileToDeleteWithPrefix);
+        //return element;
     }
 
     public String getFileToDelete(){

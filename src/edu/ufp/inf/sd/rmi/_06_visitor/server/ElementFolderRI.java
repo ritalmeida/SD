@@ -14,5 +14,5 @@ import java.rmi.RemoteException;
 public interface ElementFolderRI extends Remote {
     Object acceptVisitor(VisitorFoldersOperationsI visitor) throws RemoteException;
 
-    SingletonFoldersOperationsI getStateBooksFolder() throws RemoteException;
+    //SingletonFoldersOperationsI getStateBooksFolder() throws RemoteException;
 }

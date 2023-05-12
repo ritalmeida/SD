@@ -10,14 +10,19 @@ public class VisitorFoldersOperationCreateFile implements VisitorFoldersOperatio
     public String fileToCreateWithPrefix;
     public VisitorFoldersOperationCreateFile(String newFolder){
 
-        SingletonFolderOperationsBooks.createSingletonFolderOperationsBooks(newFolder);
+        //SingletonFolderOperationsBooks.createSingletonFolderOperationsBooks(newFolder);
+        this.fileToCreate = newFolder;
     }
 
     @Override
-    public Object visitConcreteElementStateBooks(ElementFolderRI element) throws RemoteException {
+    public Object visitConcreteElementStateBooks(ElementFolderRI element){ //throws RemoteException {
 
-        ((ConcreteElementFolderBooksImpl)element).getStateBooksFolder().createFile(this.fileToCreate);
-        return element;
+        SingletonFolderOperationsBooks s = ((ConcreteElementFolderBooksImpl)element).getStateBooksFolder();
+        fileToCreateWithPrefix = "VisitorBook_" + fileToCreate;
+        System.out.println("VisitorStateFolderOperationDeleteFile - visitCOncreteElementStateBooks() : going to create file");
+        return s.createFile(fileToCreateWithPrefix);
+        //((ConcreteElementFolderBooksImpl)element).getStateBooksFolder().createFile(this.fileToCreate);
+        //return element;
         /*SingletonFolderOperationsBooks s = ((ConcreteElementFolderBooksImpl)element).getStateBooksFolder();
         fileToCreateWithPrefix = "VisitorBook_"+fileToCreate;
         System.out.println("VisitorStateFolderOperationDeleteFile - visitCOncreteElementStateBooks() : going to create file");

@@ -12,8 +12,7 @@
  */
 package edu.ufp.inf.sd.rmi._06_visitor.server;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,33 +22,41 @@ public class SingletonFolderOperationsBooks implements SingletonFoldersOperation
     private final File folderBooks;
 
     /** private - Avoid direct instantiation */
-    private SingletonFolderOperationsBooks(String folder) {
-        folderBooks = new File(folder);
-    }
+    public SingletonFolderOperationsBooks(File folderBooks) {
 
-    public synchronized static SingletonFolderOperationsBooks createSingletonFolderOperationsBooks(String folder){
-        if (singletonFolderOperationsBooks==null){
-            singletonFolderOperationsBooks = new SingletonFolderOperationsBooks(folder);
-        }
-        return singletonFolderOperationsBooks;
+        this.folderBooks = folderBooks;
+        Logger.getLogger(this.getClass().getName()).log(Level.INFO, " - contructor (@ {0}", this.folderBooks);
     }
 
     @Override
-    public Boolean createFile(String fname) {
-        try {
-            File newFile = new File(this.folderBooks.getAbsolutePath() + "/" + fname);
-            return newFile.createNewFile();
+    public File createFile(String fname) {
+
+        String path = new StringBuilder().append(this.folderBooks).append('/').append(fname).toString();
+
+        try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path), "utf-8"))){
+
+            writer.write("Isto é um teste!");
+            Logger.getLogger(this.getClass().getName()).log(Level.INFO, " - createFile()");
+            return null;
         } catch (IOException ex) {
-            Logger.getLogger(SingletonFolderOperationsBooks.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
-        return false;
+        return null;
     }
 
     @Override
-    public Boolean deleteFile(String fname) {
-        File existingFile = new File(this.folderBooks.getAbsolutePath() + "/" + fname);
-        return existingFile.delete();
+    public File deleteFile(String fname) {
+
+        String path = new StringBuilder().append(this.folderBooks).append('/').append(fname).toString();
+        File f = new File(path);
+
+        if (f.delete()) {
+
+            Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Delete file @ {0}", f.getName());
+        } else {
+            System.out.println("Delete operaton is failed.");
+            Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Delete operation is failed");
+        }
+        return f;
     }
-
-
 }

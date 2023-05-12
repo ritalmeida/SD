@@ -1,6 +1,8 @@
 package edu.ufp.inf.sd.rmi._06_visitor.server;
 
+import java.io.File;
+
 public interface SingletonFoldersOperationsI {
-    public Boolean createFile(String fname);
-    public Boolean deleteFile(String fname);
+    public File createFile(String fname);
+    public File deleteFile(String fname);
 }

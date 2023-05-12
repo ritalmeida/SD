@@ -5,20 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="48bab2fd-3e80-4dd0-899b-60c2ff71add9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_03_pingpong/SD_PL_04_JavaRMI_PingPong.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_04_diglib/SD_PL_05_JavaRMI_DigLib.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_05_observer/SD_PL_06_JavaRMI_Observer.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_06_visitor/SD_PL_07_JavaRMI_Visitor.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SD.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SD.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_04_diglib/client/DigLibClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_04_diglib/client/DigLibClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_04_diglib/server/DigLibFactoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_04_diglib/server/DigLibFactoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_04_diglib/server/DigLibServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_04_diglib/server/DigLibServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_04_diglib/server/DigLibSessionImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_04_diglib/server/DigLibSessionImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_05_observer/client/ObserverGuiClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_05_observer/client/ObserverGuiClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_05_observer/client/ObserverImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_05_observer/client/ObserverImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_05_observer/server/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_05_observer/server/State.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_05_observer/server/SubjectImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_05_observer/server/SubjectImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_05_observer/server/SubjectServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_05_observer/server/SubjectServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_06_visitor/client/VisitorClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_06_visitor/client/VisitorClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_06_visitor/server/ConcreteElementFolderBooksImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_06_visitor/server/ConcreteElementFolderBooksImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_06_visitor/server/ElementFolderRI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_06_visitor/server/ElementFolderRI.java" afterDir="false" />
@@ -26,7 +14,6 @@
       <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_06_visitor/server/SingletonFoldersOperationsI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_06_visitor/server/SingletonFoldersOperationsI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_06_visitor/server/VisitorFoldersOperationCreateFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_06_visitor/server/VisitorFoldersOperationCreateFile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_06_visitor/server/VisitorFoldersOperationDeleteFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_06_visitor/server/VisitorFoldersOperationDeleteFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_06_visitor/server/VisitorFoldersOperationsI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_06_visitor/server/VisitorFoldersOperationsI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_06_visitor/server/VisitorServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_06_visitor/server/VisitorServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -79,7 +66,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/Ritaa/Documents/FACULDADE/SISTEMASDISTRIBUIDOS/SD/src/edu/ufp/inf/sd/rmi/_05_observer",
+    "last_opened_file_path": "/Users/Ritaa/Documents/FACULDADE/SISTEMASDISTRIBUIDOS/SD/src/edu/ufp/inf/sd/rmi/_06_visitor",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -98,11 +85,11 @@
       <recent name="edu.ufp.inf.sd.rmi._04_diglib.server" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_06_visitor" />
       <recent name="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_05_observer" />
       <recent name="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_03_pingpong" />
       <recent name="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_04_diglib" />
       <recent name="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi" />
-      <recent name="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_05_observer/runscripts" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_06_visitor/server" />
@@ -116,14 +103,14 @@
       <recent name="edu.ufp.inf.sd.rmi._02_calculator.client" />
     </key>
   </component>
-  <component name="RunManager" selected="Shell Script._4_runclient.sh">
-    <configuration name="_1_runpython.sh (1)" type="ShConfigurationType" temporary="true">
+  <component name="RunManager" selected="Shell Script._4_runclient.sh (1)">
+    <configuration name="_1_runpython.sh" type="ShConfigurationType" temporary="true">
       <option name="SCRIPT_TEXT" value="" />
       <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
-      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_05_observer/runscripts/_1_runpython.sh" />
+      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_06_visitor/runscripts/_1_runpython.sh" />
       <option name="SCRIPT_OPTIONS" value="" />
       <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
-      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_05_observer/runscripts" />
+      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_06_visitor/runscripts" />
       <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
       <option name="INTERPRETER_PATH" value="/usr/bin/env" />
       <option name="INTERPRETER_OPTIONS" value="bash" />
@@ -132,13 +119,13 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="_2_runregistry.sh" type="ShConfigurationType" temporary="true">
+    <configuration name="_2_runregistry.sh (1)" type="ShConfigurationType" temporary="true">
       <option name="SCRIPT_TEXT" value="" />
       <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
-      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_05_observer/runscripts/_2_runregistry.sh" />
+      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_06_visitor/runscripts/_2_runregistry.sh" />
       <option name="SCRIPT_OPTIONS" value="" />
       <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
-      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_05_observer/runscripts" />
+      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_06_visitor/runscripts" />
       <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
       <option name="INTERPRETER_PATH" value="/usr/bin/env" />
       <option name="INTERPRETER_OPTIONS" value="bash" />
@@ -147,13 +134,13 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="_3_runserver.sh" type="ShConfigurationType" temporary="true">
+    <configuration name="_3_runserver.sh (1)" type="ShConfigurationType" temporary="true">
       <option name="SCRIPT_TEXT" value="" />
       <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
-      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_05_observer/runscripts/_3_runserver.sh" />
+      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_06_visitor/runscripts/_3_runserver.sh" />
       <option name="SCRIPT_OPTIONS" value="" />
       <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
-      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_05_observer/runscripts" />
+      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_06_visitor/runscripts" />
       <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
       <option name="INTERPRETER_PATH" value="/usr/bin/env" />
       <option name="INTERPRETER_OPTIONS" value="bash" />
@@ -165,10 +152,10 @@
     <configuration name="_4_runclient.sh (1)" type="ShConfigurationType" temporary="true">
       <option name="SCRIPT_TEXT" value="" />
       <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
-      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_04_diglib/runscripts/_4_runclient.sh" />
+      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_06_visitor/runscripts/_4_runclient.sh" />
       <option name="SCRIPT_OPTIONS" value="" />
       <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
-      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_04_diglib/runscripts" />
+      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$/src/edu/ufp/inf/sd/rmi/_06_visitor/runscripts" />
       <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
       <option name="INTERPRETER_PATH" value="/usr/bin/env" />
       <option name="INTERPRETER_OPTIONS" value="bash" />
@@ -194,11 +181,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Shell Script._4_runclient.sh" />
-        <item itemvalue="Shell Script._3_runserver.sh" />
-        <item itemvalue="Shell Script._2_runregistry.sh" />
-        <item itemvalue="Shell Script._1_runpython.sh (1)" />
         <item itemvalue="Shell Script._4_runclient.sh (1)" />
+        <item itemvalue="Shell Script._3_runserver.sh (1)" />
+        <item itemvalue="Shell Script._2_runregistry.sh (1)" />
+        <item itemvalue="Shell Script._1_runpython.sh" />
+        <item itemvalue="Shell Script._4_runclient.sh" />
       </list>
     </recent_temporary>
   </component>
@@ -223,7 +210,7 @@
       <workItem from="1680192864110" duration="114000" />
       <workItem from="1680209276513" duration="3773000" />
       <workItem from="1680539011494" duration="3433000" />
-      <workItem from="1683902100350" duration="4510000" />
+      <workItem from="1683902100350" duration="11179000" />
     </task>
     <task id="LOCAL-00001" summary="05_observer">
       <created>1678708057392</created>
@@ -253,7 +240,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680174004102</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="06_visitor update">
+      <created>1683906827298</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1683906827298</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
