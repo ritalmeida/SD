@@ -5,7 +5,6 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 public class HelloWorldImpl extends UnicastRemoteObject implements HelloWorldRI {
 
 
