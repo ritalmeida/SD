@@ -55,7 +55,7 @@ public class DigLibClient {
     public DigLibClient(String args[]) {
         try {
             //List ans set args
-            SetupContextRMI.printArgs(this.getClass().getName(), args);
+            //SetupContextRMI.printArgs(this.getClass().getName(), args);
             String registryIP = args[0];
             String registryPort = args[1];
             String serviceName = args[2];
@@ -66,7 +66,7 @@ public class DigLibClient {
         }
     }
 
-    private Remote lookupService() {
+    private void lookupService() {
         try {
             //Get proxy MAIL_TO_ADDR rmiregistry
             Registry registry = contextRMI.getRegistry();
@@ -85,26 +85,89 @@ public class DigLibClient {
         } catch (RemoteException | NotBoundException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
-        return digLibFactoryRI;
     }
     
     private void playService() {
 
         try {
-            DigLibSessionRI sessionRI = this.digLibFactoryRI.login("guest", "ufp");
 
-            if (sessionRI != null) {
+            DigLibSessionRI session = this.digLibFactoryRI.login("guest", "ufp");
 
-                Book[] books = sessionRI.search("Distributed", "Tanenbaum");
+            if (session != null) {
+
+                Book[] books = session.search("Distributed", "Colouris");
 
                 for (Book b : books) {
 
                     System.out.println(books.toString());
                 }
+
+            /*DigLibSessionRI session = login("guest", "ufp");
+
+            if (session != null) {
+
+                Book[] book = searchBooks(session, "Distributed", "Tanenbaum");
+
+                if (book.length > 0) {
+
+                    for (Book books : book) {
+
+                        System.out.println("books = " + books + "\n");
+                    }
+                } else {
+                    System.out.println("[session] - 1. Book not found\n");
+                }
+
+                Book[] b = searchBooks(session, "Math", "Perry");
+
+                if (b.length > 0) {
+
+                    for (Book books : b) {
+
+                        System.out.println(books);
+                    }
+                } else {
+                    System.out.println("[session] - 2. Book not found\n");
+                }
+            } else {
+                System.out.println("[session] - No Session, Error\n");
             }
 
-            Logger.getLogger(this.getClass().getName()).log(Level.INFO, "going MAIL_TO_ADDR finish, bye. ;)");
+            DigLibSessionRI error = login("gue", "fpu");
+
+            if (error != null) {
+
+                Book[] book = searchBooks(error, "Distributed Systems: principles and paradigms", "Tanenbaum");
+
+                System.out.println("book.length = " + book.length + "\n");
+
+                if (book.length > 0) {
+
+                    for (Book books : book) {
+
+                        System.out.println("books = " + books + "\n");
+                    }
+                } else {
+                    System.out.println("[error] - 1. Book not found");
+                }
+                Book[] b = searchBooks(error, "Math", "Perry");
+
+                if (b.length > 0) {
+
+                    for (Book books : b) {
+
+                        System.out.println(books);
+                    }
+                } else {
+
+                    System.out.println("[error] - 2. Book not foundn");
+                }
+            } else {
+
+                System.out.println("[error] - No session. Error!\n");*/
+            }
         } catch (RemoteException ex) {
+
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
     }

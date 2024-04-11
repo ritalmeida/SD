@@ -1,8 +1,5 @@
 package edu.ufp.inf.sd.rmi._04_diglib.server;
 
-import edu.ufp.inf.sd.rmi._04_diglib.server.Book;
-import edu.ufp.inf.sd.rmi._04_diglib.server.User;
-
 import java.util.ArrayList;
 
 /**
@@ -32,14 +29,16 @@ public class DBMockup {
 
     /**
      * Registers a new user.
-     * 
+     *
      * @param u username
      * @param p passwd
+     * @return
      */
-    public void register(String u, String p) {
+    public boolean register(String u, String p) {
         if (!exists(u, p)) {
             users.add(new User(u, p));
         }
+        return false;
     }
 
     /**

@@ -10,39 +10,45 @@ import java.util.logging.Logger;
 
 public class DigLibFactoryImpl extends UnicastRemoteObject implements DigLibFactoryRI {
 
-    private HashMap<String, DigLibSessionRI> sessions;
+    private HashMap<String, DigLibSessionRI> sessions = new HashMap<>();
     private DBMockup database;
 
-    public DigLibFactoryImpl() throws RemoteException {
+    public DigLibFactoryImpl(DBMockup database) throws RemoteException {
 
         super();
-        database = new DBMockup();
-        sessions = new HashMap<>();
+        this.database = database;
     }
 
     @Override
     public boolean register(String username, String password) throws RemoteException {
 
-        if (!database.exists(username, password)) {
+        /*if (!database.exists(username, password)) {
 
             database.register(username, password);
             return true;
         }
-        return false;
+        return false;*/
+
+        boolean register = this.database.register(username, password);
+        return register;
     }
 
     @Override
     public DigLibSessionRI login(String username, String password) throws RemoteException {
 
-        if(database.exists(username, password)) {
+        if (this.sessions.containsKey(username)) {
 
-            if (!this.sessions.containsKey(username)) {
-
-                DigLibSessionRI digLibSessionRI = new DigLibSessionImpl(this.database, this.sessions);
-                this.sessions.put(username, digLibSessionRI);
-                return digLibSessionRI;
-            }
+            return this.sessions.get(username);
         }
+
+        if (this.database.exists(username, password)) {
+
+            DigLibSessionImpl libSession = new DigLibSessionImpl(this.database);
+            this.sessions.put(username, libSession);
+
+            return libSession;
+        }
+
         return null;
     }
 

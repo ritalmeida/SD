@@ -40,21 +40,15 @@ public class DigLibServer {
 
     public static void main(String[] args) {
         if (args != null && args.length < 3) {
-            System.err.println("usage: java [options] edu.ufp.sd._04_diglib.server.DigLibServer <rmi_registry_ip> <rmi_registry_port> <service_name>");
+            //System.err.println("usage: java [options] edu.ufp.sd._04_diglib.server.DigLibServer <rmi_registry_ip> <rmi_registry_port> <service_name>");
             System.exit(-1);
         } else {
+            assert args != null;
             //1. ============ Create Servant ============
-            DigLibServer hws = new DigLibServer(args);
+            DigLibServer srv = new DigLibServer(args);
             //2. ============ Rebind servant on rmiregistry ============
-            hws.rebindService();
+            srv.rebindService();
         }
-        /*
-        try {
-            loadProperties();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        */
     }
 
     /**
@@ -64,7 +58,7 @@ public class DigLibServer {
     public DigLibServer(String args[]) {
         try {
             //============ List and Set args ============
-            SetupContextRMI.printArgs(this.getClass().getName(), args);
+            //SetupContextRMI.printArgs(this.getClass().getName(), args);
             String registryIP = args[0];
             String registryPort = args[1];
             String serviceName = args[2];
@@ -81,17 +75,19 @@ public class DigLibServer {
             Registry registry = contextRMI.getRegistry();
             //Bind service on rmiregistry and wait for calls
             if (registry != null) {
+
+                DBMockup db = new DBMockup();
                 //============ Create Servant ============
-                helloWorldRI= new HelloWorldImpl();
+                DigLibFactoryRI digLibFactoryRI= new DigLibFactoryImpl(db);
 
                 //Get service url (including servicename)
                 String serviceUrl = contextRMI.getServicesUrl(0);
-                Logger.getLogger(this.getClass().getName()).log(Level.INFO, "going MAIL_TO_ADDR rebind service @ {0}", serviceUrl);
+                //Logger.getLogger(this.getClass().getName()).log(Level.INFO, "going MAIL_TO_ADDR rebind service @ {0}", serviceUrl);
 
                 //============ Rebind servant ============
                 //Naming.bind(serviceUrl, helloWorldRI);
-                registry.rebind(serviceUrl, helloWorldRI);
-                Logger.getLogger(this.getClass().getName()).log(Level.INFO, "service bound and running. :)");
+                registry.rebind(serviceUrl, digLibFactoryRI);
+                //Logger.getLogger(this.getClass().getName()).log(Level.INFO, "service bound and running. :)");
             } else {
                 //System.out.println("HelloWorldServer - Constructor(): create registry on port 1099");
                 Logger.getLogger(this.getClass().getName()).log(Level.INFO, "registry not bound (check IPs). :(");

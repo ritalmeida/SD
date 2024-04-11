@@ -11,17 +11,17 @@ import java.util.logging.Logger;
 public class DigLibSessionImpl extends UnicastRemoteObject implements DigLibSessionRI {
 
     private DBMockup database;
-    private HashMap<String, DigLibSessionRI> sessions;
 
-    public DigLibSessionImpl(DBMockup database, HashMap<String, DigLibSessionRI> sessions) throws RemoteException {
+    public DigLibSessionImpl(DBMockup database) throws RemoteException {
 
+        super();
         this.database = database;
-        this.sessions = sessions;
+        //this.sessions = sessions;
     }
 
     @Override
     public Book[] search(String tittle, String author) throws RemoteException {
 
-        return database.select(tittle, author);
+        return this.database.select(tittle, author);
     }
 }
