@@ -2,6 +2,7 @@ package edu.ufp.inf.sd.rmi._05_observer.server;
 
 import edu.ufp.inf.sd.rmi._01_helloworld.server.HelloWorldImpl;
 import edu.ufp.inf.sd.rmi._01_helloworld.server.HelloWorldRI;
+import edu.ufp.inf.sd.rmi._05_observer.client.ObserverImpl;
 import edu.ufp.inf.sd.rmi.util.rmisetup.SetupContextRMI;
 
 import java.io.FileInputStream;
@@ -40,7 +41,7 @@ public class SubjectServer {
 
     public static void main(String[] args) {
         if (args != null && args.length < 3) {
-            //System.err.println("usage: java [options] edu.ufp.sd._01_helloworld.server.HelloWorldServer <rmi_registry_ip> <rmi_registry_port> <service_name>");
+            System.err.println("usage: java [options] edu.ufp.sd._05_observer.server.SubjectServer <rmi_registry_ip> <rmi_registry_port> <service_name>");
             System.exit(-1);
         } else {
             //1. ============ Create Servant ============
@@ -57,7 +58,7 @@ public class SubjectServer {
     public SubjectServer(String args[]) {
         try {
             //============ List and Set args ============
-            //SetupContextRMI.printArgs(this.getClass().getName(), args);
+            SetupContextRMI.printArgs(this.getClass().getName(), args);
             String registryIP = args[0];
             String registryPort = args[1];
             String serviceName = args[2];
@@ -70,28 +71,44 @@ public class SubjectServer {
 
     private void rebindService() {
         try {
-            //Get proxy MAIL_TO_ADDR rmiregistry
-            Registry registry = contextRMI.getRegistry();
             //Bind service on rmiregistry and wait for calls
-            if (registry != null) {
+            if (this.contextRMI.getRegistry() != null) {
                 //============ Create Servant ============
-                subjectRI= new SubjectImpl();
-
+                this.subjectRI = new SubjectImpl();
                 //Get service url (including servicename)
                 String serviceUrl = contextRMI.getServicesUrl(0);
-                //Logger.getLogger(this.getClass().getName()).log(Level.INFO, "going MAIL_TO_ADDR rebind service @ {0}", serviceUrl);
-
+                Logger.getLogger(this.getClass().getName()).log(Level.INFO, "going MAIL_TO_ADDR rebind service @ {0}", serviceUrl);
                 //============ Rebind servant ============
-                //Naming.bind(serviceUrl, helloWorldRI);
-                //registry.rebind(serviceUrl, subjectRI);
-                //Logger.getLogger(this.getClass().getName()).log(Level.INFO, "service bound and running. :)");
+                this.contextRMI.getRegistry().rebind(serviceUrl, this.subjectRI);
+                Logger.getLogger(this.getClass().getName()).log(Level.INFO, "service bound and running. :)");
             } else {
-                //System.out.println("HelloWorldServer - Constructor(): create registry on port 1099");
                 Logger.getLogger(this.getClass().getName()).log(Level.INFO, "registry not bound (check IPs). :(");
-                //registry = LocateRegistry.createRegistry(1099);
             }
         } catch (RemoteException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @SuppressWarnings("unused")
+    private static void loadProperties() throws IOException {
+
+        Logger.getLogger(Thread.currentThread().getName()).log(Level.INFO, "going MAIL_TO_ADDR load props...");
+        // create and load default properties
+        Properties defaulltProps = new Properties();
+        FileInputStream in = new FileInputStream("defaultproperties.txt");
+        defaulltProps.load(in);
+        in.close();
+
+        BiConsumer<Object, Object> bc = (key, value) ->{
+            System.out.println(key.toString()+"="+value.toString());
+        };
+        defaulltProps.forEach(bc);
+
+        // create application properties with default
+        Properties properties = new Properties(defaulltProps);
+
+        FileOutputStream out = new FileOutputStream("defaultproperties2.txt");
+        properties.store(out, "---No Comment---");
+        out.close();
     }
 }

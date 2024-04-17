@@ -24,6 +24,7 @@ public class State implements Serializable {
      * @param m 
      */
     public State(String id, String m) {
+
         this.id = id;
         this.msg = m;
     }
@@ -50,5 +51,11 @@ public class State implements Serializable {
      */
     public void setInfo(String m){
         this.msg = m;
+    }
+
+    @Override
+    public String toString() {
+
+        return this.id + ": " + this.msg;
     }
 }

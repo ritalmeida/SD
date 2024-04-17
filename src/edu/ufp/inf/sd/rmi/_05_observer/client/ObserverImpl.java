@@ -11,30 +11,46 @@ import java.util.logging.Logger;
 
 public class ObserverImpl extends UnicastRemoteObject implements ObserverRI {
 
-    private String id;
-    private State lastObserverState;
-    protected SubjectRI subjectRI;
-    protected ObserverGuiClient chatFrame;
+    private String username;
+    private SubjectRI subjectRI;
+    private ObserverGuiClient observerGuiClient;
 
-    public ObserverImpl(String id, ObserverGuiClient chatFrame, SubjectRI subjectRI) throws RemoteException {
+    public ObserverImpl() throws RemoteException {
 
         super();
-        this.id = id;
+    }
+
+    public ObserverImpl(String username, ObserverGuiClient observerGuiClient, SubjectRI subjectRI) throws RemoteException {
+
+        super();
+        this.username = username;
+        this.observerGuiClient = observerGuiClient;
         this.subjectRI = subjectRI;
-        this.chatFrame = chatFrame;
-        this.lastObserverState = new State(id, "");
         this.subjectRI.attach(this);
     }
 
     @Override
     public void update() throws RemoteException {
 
-        this.lastObserverState = subjectRI.getState();
-        this.chatFrame.updateTextArea();
+        //observerState = subjectRI.getState();
+        try {
+            if (this.subjectRI.getState().getId().compareTo(this.username) == 0) {      // current user message goes to the right
+                this.observerGuiClient.doc.insertString(this.observerGuiClient.doc.getLength(), this.subjectRI.getState().toString() + "\n", this.observerGuiClient.rightAlign);
+            }
+            else {
+                this.observerGuiClient.doc.insertString(this.observerGuiClient.doc.getLength(), this.subjectRI.getState().toString() + "\n", this.observerGuiClient.leftAlign);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    protected State getLastObserverState() {
+    public SubjectRI getSubjectRI() {
+        return this.subjectRI;
+    }
 
-        return this.lastObserverState;
+    public  State getObserverState() throws RemoteException {
+
+        return this.subjectRI.getState();
     }
 }
