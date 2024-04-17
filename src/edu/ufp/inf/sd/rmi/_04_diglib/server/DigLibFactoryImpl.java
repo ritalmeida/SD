@@ -1,16 +1,12 @@
 package edu.ufp.inf.sd.rmi._04_diglib.server;
 
-import edu.ufp.inf.sd.rmi._01_helloworld.server.HelloWorldRI;
-
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.time.LocalDateTime;
 
 public class DigLibFactoryImpl extends UnicastRemoteObject implements DigLibFactoryRI {
 
-    private HashMap<String, DigLibSessionRI> sessions = new HashMap<>();
+    static int SessionTimeInSeconds = 10;
     private DBMockup database;
 
     public DigLibFactoryImpl(DBMockup database) throws RemoteException {
@@ -20,42 +16,38 @@ public class DigLibFactoryImpl extends UnicastRemoteObject implements DigLibFact
     }
 
     @Override
-    public boolean register(String username, String password) throws RemoteException {
+    public DigLibSessionRI register(User user) throws RemoteException {
 
-        /*if (!database.exists(username, password)) {
+        this.database.register(user.getUname(), user.getPword());
+        return this.login(user);
 
-            database.register(username, password);
-            return true;
-        }
-        return false;*/
-
-        boolean register = this.database.register(username, password);
-        return register;
     }
 
     @Override
-    public DigLibSessionRI login(String username, String password) throws RemoteException {
+    public DigLibSessionRI login(User user) throws RemoteException {
 
-        if (this.sessions.containsKey(username)) {
-
-            return this.sessions.get(username);
+        if (!this.database.exists(user.getUname(), user.getPword())) {
+            throw new RemoteUserNotFoundException("User not found!");
         }
 
-        if (this.database.exists(username, password)) {
-
-            DigLibSessionImpl libSession = new DigLibSessionImpl(this.database);
-            this.sessions.put(username, libSession);
-
-            return libSession;
-        }
-
-        return null;
+        return this.getSession(user);
     }
 
-    public DigLibSessionRI logout (String username) throws RemoteException {
+    /*public DigLibSessionRI logout (String username) throws RemoteException {
 
         this.sessions.remove(username);
         return null;
+    }*/
+
+    private DigLibSessionRI getSession(User user) throws RemoteException {
+
+        DigLibSessionRI sessionRI = this.database.session(user.getUname()).orElse(new DigLibSessionImpl(database, user,
+                LocalDateTime.now().plusSeconds(SessionTimeInSeconds)));
+
+        Thread thread = new Thread((Runnable)sessionRI);
+        thread.start();
+
+        return sessionRI;
     }
 
 }

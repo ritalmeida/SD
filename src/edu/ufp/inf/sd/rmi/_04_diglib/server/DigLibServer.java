@@ -36,11 +36,11 @@ public class DigLibServer {
     /**
      * Remote interface that will hold reference MAIL_TO_ADDR the Servant impl
      */
-    private HelloWorldRI helloWorldRI;
+    private DigLibFactoryRI digLibFactoryRI;
 
     public static void main(String[] args) {
         if (args != null && args.length < 3) {
-            //System.err.println("usage: java [options] edu.ufp.sd._04_diglib.server.DigLibServer <rmi_registry_ip> <rmi_registry_port> <service_name>");
+            System.err.println("usage: java [options] edu.ufp.sd._04_diglib.server.DigLibServer <rmi_registry_ip> <rmi_registry_port> <service_name>");
             System.exit(-1);
         } else {
             assert args != null;
@@ -58,7 +58,7 @@ public class DigLibServer {
     public DigLibServer(String args[]) {
         try {
             //============ List and Set args ============
-            //SetupContextRMI.printArgs(this.getClass().getName(), args);
+            SetupContextRMI.printArgs(this.getClass().getName(), args);
             String registryIP = args[0];
             String registryPort = args[1];
             String serviceName = args[2];
@@ -71,23 +71,18 @@ public class DigLibServer {
 
     private void rebindService() {
         try {
-            //Get proxy MAIL_TO_ADDR rmiregistry
-            Registry registry = contextRMI.getRegistry();
             //Bind service on rmiregistry and wait for calls
-            if (registry != null) {
+            if (this.contextRMI.getRegistry() != null) {
 
-                DBMockup db = new DBMockup();
-                //============ Create Servant ============
-                DigLibFactoryRI digLibFactoryRI= new DigLibFactoryImpl(db);
-
+                this.digLibFactoryRI = new DigLibFactoryImpl(new DBMockup());
                 //Get service url (including servicename)
                 String serviceUrl = contextRMI.getServicesUrl(0);
-                //Logger.getLogger(this.getClass().getName()).log(Level.INFO, "going MAIL_TO_ADDR rebind service @ {0}", serviceUrl);
+                Logger.getLogger(this.getClass().getName()).log(Level.INFO, "going MAIL_TO_ADDR rebind service @ {0}", serviceUrl);
 
                 //============ Rebind servant ============
                 //Naming.bind(serviceUrl, helloWorldRI);
-                registry.rebind(serviceUrl, digLibFactoryRI);
-                //Logger.getLogger(this.getClass().getName()).log(Level.INFO, "service bound and running. :)");
+                this.contextRMI.getRegistry().rebind(serviceUrl, this.digLibFactoryRI);     //DigLibService -> DigLibRI digLibFactoryRI
+                Logger.getLogger(this.getClass().getName()).log(Level.INFO, "service bound and running. :)");
             } else {
                 //System.out.println("HelloWorldServer - Constructor(): create registry on port 1099");
                 Logger.getLogger(this.getClass().getName()).log(Level.INFO, "registry not bound (check IPs). :(");
@@ -96,5 +91,28 @@ public class DigLibServer {
         } catch (RemoteException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @SuppressWarnings("unused")
+    private static void loadProperties() throws IOException {
+
+        Logger.getLogger(Thread.currentThread().getName()).log(Level.INFO, "going MAIL_TO_ADDR load props...");
+        // create and load default properties
+        Properties defaultProperties = new Properties();
+        FileInputStream in = new FileInputStream("defaultproperties.txt");
+        defaultProperties.load(in);
+        in.close();
+
+        BiConsumer<Object, Object> bc = (key, value) -> {
+            System.out.println(key.toString()+" = "+value.toString());
+        };
+        defaultProperties.forEach(bc);
+
+        // create application properties with default
+        Properties properties = new Properties(defaultProperties);
+
+        FileOutputStream out = new FileOutputStream("defaultproperties2.txt");
+        properties.store(out, "---No Comment---");
+        out.close();
     }
 }

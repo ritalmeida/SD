@@ -1,10 +1,12 @@
 package edu.ufp.inf.sd.rmi._04_diglib.server;
 
+import java.io.Serializable;
+
 /**
  *
  * @author rmoreira
  */
-public class User {
+public class User implements Serializable {
 
     private String uname;
     private String pword;

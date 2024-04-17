@@ -5,9 +5,8 @@ import java.rmi.RemoteException;
 
 
 public interface DigLibFactoryRI extends Remote {
-    boolean register(String username, String password) throws RemoteException;
 
-    DigLibSessionRI login(String username, String password) throws RemoteException;
+    public DigLibSessionRI register(User user) throws RemoteException;
 
-    DigLibSessionRI logout (String username) throws RemoteException;
+    public DigLibSessionRI login(User user) throws RemoteException;
 }
