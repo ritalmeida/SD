@@ -77,10 +77,8 @@ public class PingServer {
 
     private void rebindService() {
         try {
-            //Get proxy MAIL_TO_ADDR rmiregistry
-            Registry registry = contextRMI.getRegistry();
             //Bind service on rmiregistry and wait for calls
-            if (registry != null) {
+            if (this.contextRMI.getRegistry() != null) {
                 //============ Create Servant ============
                 pingRI = new PingImpl();
 
@@ -90,7 +88,7 @@ public class PingServer {
 
                 //============ Rebind servant ============
                 //Naming.bind(serviceUrl, helloWorldRI);
-                registry.rebind(serviceUrl, pingRI);
+                this.contextRMI.getRegistry().rebind(serviceUrl, this.pingRI);
                 Logger.getLogger(this.getClass().getName()).log(Level.INFO, "service bound and running. :)");
             } else {
                 //System.out.println("HelloWorldServer - Constructor(): create registry on port 1099");
@@ -102,6 +100,7 @@ public class PingServer {
         }
     }
 
+    @SuppressWarnings("unused")
     private static void loadProperties() throws IOException {
 
         Logger.getLogger(Thread.currentThread().getName()).log(Level.INFO, "goig MAIL_TO_ADDR load props...");

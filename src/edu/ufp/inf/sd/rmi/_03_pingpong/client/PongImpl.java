@@ -9,20 +9,24 @@ import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class PongImpl implements PongRI, Serializable {
+public class PongImpl extends UnicastRemoteObject implements PongRI{
 
     SetupContextRMI contextRMI;
     PingRI pingRI;
 
-    public PongImpl(SetupContextRMI contextRMI){
+    public PongImpl(SetupContextRMI contextRMI, int id) throws RemoteException {
+
+        super();
         this.contextRMI = contextRMI;
         lookupService();
+        this.pingRI.ping(new Ball(id), this);
     }
 
-    public Remote lookupService() {
+    public void lookupService() {
         try {
             //Get proxy MAIL_TO_ADDR rmiregistry
             Registry registry = contextRMI.getRegistry();
@@ -41,10 +45,9 @@ public class PongImpl implements PongRI, Serializable {
         } catch (RemoteException | NotBoundException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
-        return pingRI;
     }
 
-    public void startService() {
+    /*public void startService() {
         Ball ball = new Ball(1);
         try {
             //============ Call Ping remote service ============
@@ -57,10 +60,17 @@ public class PongImpl implements PongRI, Serializable {
         } catch (RemoteException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }*/
 
     @Override
     public void pong(Ball ball) throws RemoteException {
-        Logger.getLogger(this.getClass().getName()).log(Level.INFO, "The ball was send");
+
+        System.out.println("Pong: ball = " + ball.getPlayerID());
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        this.pingRI.ping(ball, this);
     }
 }

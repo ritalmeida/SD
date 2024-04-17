@@ -35,7 +35,9 @@ public class PongClient {
             System.exit(-1);
         } else {
             //1. ============ Setup client RMI context ============
-            PongClient hwc=new PongClient(args);
+            PongClient hwc = new PongClient(args);
+            //3. ============ Play with service ===================
+            hwc.playService();
         }
     }
 
@@ -47,11 +49,24 @@ public class PongClient {
             String registryPort = args[1];
             String serviceName = args[2];
             //Create a context for RMI setup
-            contextRMI = new SetupContextRMI(this.getClass(), registryIP, registryPort, new String[]{serviceName});
-            PongImpl pongImpl = new PongImpl(contextRMI);
-            pongImpl.startService();
+            this.contextRMI = new SetupContextRMI(this.getClass(), registryIP, registryPort, new String[]{serviceName});
+            //PongImpl pongImpl = new PongImpl(contextRMI);
+            //pongImpl.startService();
         } catch (RemoteException e) {
             Logger.getLogger(PongClient.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
+    private void playService() {
+
+        try {
+            for (int i = 0; i < 5; ++i) {
+
+                new PongImpl(contextRMI, i); //create i number of clients
+            }
+            Logger.getLogger(this.getClass().getName()).log(Level.INFO, "going MAIL_TO_ADDR finish, bye. ;)");
+        } catch (RemoteException e) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
         }
     }
 }
