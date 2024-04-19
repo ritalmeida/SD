@@ -152,6 +152,7 @@ public class Worker {
                 System.out.println(" [x] Received '" + message + "'");
                 try {
                     doWork(message);
+                    logWorker(message);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
@@ -212,7 +213,7 @@ public class Worker {
         String pass = SMTPConfigs.SMTP_PASS;
         String subject = "Email - RabbitMQ";
 
-        //SendMail.sendMail(to, from, host, port, auth, user, pass, subject, message);
+        SendMail.sendMail(to, from, host, port, auth, user, pass, subject, message);
 
         System.out.println(" [xxxx] Email Sent ");
     }

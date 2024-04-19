@@ -13,7 +13,8 @@ public class SMTPConfigs {
     public final static String SMTP_HOST_ADDR= "smtp.mailtrap.io";
     public final static String SMTP_HOST_PORT= "2525";
 
-    public final static String SMTP_USER="...";
-    public final static String SMTP_PASS="...";
+    //Mailtrap configs
+    public final static String SMTP_USER="95269f703b6271";
+    public final static String SMTP_PASS="c4f6eb77697f6e";
 
 }
