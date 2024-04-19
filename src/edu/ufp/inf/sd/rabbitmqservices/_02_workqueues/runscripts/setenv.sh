@@ -24,11 +24,11 @@ export JAVAPROJ_NAME=SD
 export JAVAPROJ=/Users/Ritaa/Documents/FACULDADE/SistemasDistribuidos/SD
 export RABBITMQ_SERVICES_FOLDER=edu/ufp/inf/sd/rabbitmqservices
 export RABBITMQ_SERVICES_PACKAGE=edu.ufp.inf.sd.rabbitmqservices
-export PACKAGE=_01_hello
-export QUEUE_NAME_PREFIX=hello
+export PACKAGE=_02_workqueues
+export QUEUE_NAME_PREFIX=workqueues
 export EXCHANGE_NAME_PREFIX=NA
-export PRODUCER_CLASS_PREFIX=Send
-export CONSUMER_CLASS_PREFIX=Recv
+export PRODUCER_CLASS_PREFIX=NewTask
+export CONSUMER_CLASS_PREFIX=Worker
 
 #@REM ==== NETWORK STUFF ====
 export BROKER_HOST=localhost

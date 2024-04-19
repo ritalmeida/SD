@@ -9,6 +9,11 @@ import com.rabbitmq.client.*;
 import edu.ufp.inf.sd.rabbitmqservices._02_workqueues.producer.NewTask;
 import edu.ufp.inf.sd.rabbitmqservices.util.RabbitUtils;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 
 /**
  * Round-robin dispatching:
@@ -179,5 +184,36 @@ public class Worker {
                 Thread.sleep(1000);
             }
         }
+    }
+
+    private static void logWorker(String message) {
+
+        String content = message + "\n";
+        String path = "/Users/Ritaa/Documents/FACULDADE/SistemasDistribuidos/SD/src/edu/ufp/inf/sd/rabbitmqservices/_02_workqueues/consumer/log.txt";
+
+        try (FileWriter fileWriter = new FileWriter(path, true);
+             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+             PrintWriter printWriter = new PrintWriter(bufferedWriter);) {
+
+            printWriter.println(content);
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+    }
+
+    public static void sendMail(String message) {
+
+        String to =SMTPConfigs.MAIL_TO_ADDR;
+        String from =SMTPConfigs.MAIL_FROM_ADDR;
+        String host = SMTPConfigs.SMTP_HOST_ADDR;
+        String port = SMTPConfigs.SMTP_HOST_PORT;
+        String auth = SMTPConfigs.KEY_MAIL_SMTP_AUTH;
+        String user = SMTPConfigs.SMTP_USER;
+        String pass = SMTPConfigs.SMTP_PASS;
+        String subject = "Email - RabbitMQ";
+
+        //SendMail.sendMail(to, from, host, port, auth, user, pass, subject, message);
+
+        System.out.println(" [xxxx] Email Sent ");
     }
 }
