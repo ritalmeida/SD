@@ -22,7 +22,6 @@ package edu.ufp.inf.sd.rabbitmqservices._01_hello.consumer;
 import com.rabbitmq.client.*;
 import edu.ufp.inf.sd.rabbitmqservices.util.RabbitUtils;
 
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
