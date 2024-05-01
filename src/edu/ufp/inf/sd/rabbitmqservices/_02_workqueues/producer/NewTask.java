@@ -7,7 +7,6 @@ package edu.ufp.inf.sd.rabbitmqservices._02_workqueues.producer;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.MessageProperties;
 import edu.ufp.inf.sd.rabbitmqservices.util.RabbitUtils;
 

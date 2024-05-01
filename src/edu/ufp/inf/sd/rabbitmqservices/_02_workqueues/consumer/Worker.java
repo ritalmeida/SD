@@ -202,7 +202,7 @@ public class Worker {
         }
     }
 
-    public static void sendMail(String message) {
+    public static void mailWorker(String message) {
 
         String to =SMTPConfigs.MAIL_TO_ADDR;
         String from =SMTPConfigs.MAIL_FROM_ADDR;
