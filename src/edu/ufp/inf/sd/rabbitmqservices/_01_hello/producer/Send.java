@@ -65,7 +65,7 @@ public class Send {
             System.out.println(" [x] Sent '" + message + "'");
 
         } catch (IOException | TimeoutException e) {
-            Logger.getLogger(EmitLog.class.getName()).log(Level.INFO, e.toString());
+            Logger.getLogger(Send.class.getName()).log(Level.INFO, e.toString());
         }
         /* try-with-resources will close resources automatically in reverse order, thus avoiding finally clause.
           finally {
